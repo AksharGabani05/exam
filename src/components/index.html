@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>Llogin page</title>
+</head>
+<body>
+    <div class="container">
+        <div id="login-form">
+            <h2>Login</h2>
+            <form id="login-form">
+                <label>Username:</label>
+                <input type="text" id="login-username" required>
+                <label>Password:</label>
+                <input type="password" id="login-password" required>
+                <button type="button" onclick="login()">Login</button>
+            </form>
+        </div>
+        <div id="signup-form">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <label>Username:</label>
+                <input type="text" id="signup-username" required>
+                <label>Password:</label>
+                <input type="password" id="signup-password" required>
+                <button type="button" onclick="signup()">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+   
+</body>
+
+<script>
+    function login() {
+    var username = document.getElementById("login-username").value;
+    var password = document.getElementById("login-password").value;
+
+    
+    var storedUser = localStorage.getItem(username);
+
+    if (storedUser && JSON.parse(storedUser).password === password) {
+        alert("Login successful!");
+        window.location="http://localhost:3000/"
+    } else {
+        alert("Invalid username or password");
+    }
+}
+
+function signup() {
+    var username = document.getElementById("signup-username").value;
+    var password = document.getElementById("signup-password").value;
+
+    if (localStorage.getItem(username)) {
+        alert("Username already exist");
+    } else {
+        
+        localStorage.setItem(username, JSON.stringify({ password: password }));
+        alert("Signup successful!");
+    }
+}
+
+</script>
+</html>
+
+
